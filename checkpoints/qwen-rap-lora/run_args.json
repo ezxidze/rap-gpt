@@ -1,0 +1,19 @@
+{
+  "dataset": "data\\lyrics.jsonl",
+  "model": "google/gemma-3-4b-pt",
+  "output_dir": "checkpoints\\qwen-rap-lora",
+  "max_seq_length": 768,
+  "batch_size": 1,
+  "grad_accum": 16,
+  "epochs": 6,
+  "learning_rate": 0.0002,
+  "warmup_ratio": 0.03,
+  "weight_decay": 0.0,
+  "packing": false,
+  "lora_r": 32,
+  "lora_alpha": 64,
+  "lora_dropout": 0.05,
+  "seed": 42,
+  "save_steps": 200,
+  "logging_steps": 10
+}

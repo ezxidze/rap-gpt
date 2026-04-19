@@ -3,13 +3,14 @@ __pycache__/
 *.pyc
 *.pyo
 
-# данные и чекпоинты
-data/
-checkpoints/
-logs/
-*.jsonl
+# По умолчанию чекпоинты не коммитим, но готовый LoRA-адаптер — исключение.
+checkpoints/*
+!checkpoints/qwen-rap-lora/
+checkpoints/qwen-rap-lora/checkpoint-*/
+checkpoints/qwen-rap-lora/optimizer.pt
 
-# HF кэш (если вдруг окажется рядом)
+# логи и кэш
+logs/
 .cache/
 
 # IDE
