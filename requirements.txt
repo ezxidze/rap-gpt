@@ -1,0 +1,22 @@
+# Core ML stack (Torch 2.x+ compatible)
+torch>=2.3.0
+transformers>=4.44.0
+accelerate>=0.33.0
+peft>=0.12.0
+trl>=0.9.6
+bitsandbytes>=0.43.3
+datasets>=2.20.0
+sentencepiece>=0.2.0
+safetensors>=0.4.3
+
+# Parser
+aiohttp>=3.9.5
+beautifulsoup4>=4.12.3
+lxml>=5.2.2
+tqdm>=4.66.4
+
+# UI
+gradio>=4.44.0
+
+# Utilities
+pynvml>=11.5.0

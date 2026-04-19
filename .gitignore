@@ -1,0 +1,21 @@
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# данные и чекпоинты
+data/
+checkpoints/
+logs/
+*.jsonl
+
+# HF кэш (если вдруг окажется рядом)
+.cache/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+Thumbs.db
+.DS_Store
