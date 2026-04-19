@@ -23,7 +23,11 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from pathlib import Path
+
+# Снижает фрагментацию VRAM на длинных рантаймах (важно на 8GB).
+os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
 import torch
 from datasets import load_dataset
@@ -36,6 +40,20 @@ from transformers import (
     TrainingArguments,
 )
 from trl import SFTConfig, SFTTrainer
+
+# Обход OOM в SFTTrainer.compute_loss: TRL 1.2 считает entropy-метрику по
+# полным логитам (Gemma-3 vocab=256k → временные тензоры по ~400MB на bf16).
+# Метрика чисто декоративная для тренировки, подменяем на no-op.
+import trl.trainer.sft_trainer as _trl_sft
+import trl.trainer.utils as _trl_utils
+
+
+def _noop_entropy(logits: torch.Tensor, chunk_size: int = 128) -> torch.Tensor:
+    return torch.zeros(logits.shape[:-1], device=logits.device, dtype=logits.dtype)
+
+
+_trl_sft.entropy_from_logits = _noop_entropy
+_trl_utils.entropy_from_logits = _noop_entropy
 
 
 class TokenTypeIdsCollator:
